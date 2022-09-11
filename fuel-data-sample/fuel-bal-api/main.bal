@@ -6,8 +6,6 @@ import ballerina/regex;
 import ballerina/time;
 import ballerina/http;
 
-configurable string FuelFileName = "resources/PET_PRI_GND_DCUS_NUS_W - Data 1.csv";
-
 # Fuel prices record
 #
 # + ymd - Integer key representing 4 digit Year, 2 digit Month, 2 digit Day
@@ -26,20 +24,6 @@ type FuelPrices record {
 
 # Fuel price storage table
 table<FuelPrices> key(ymd) FuelTable = table [];
-
-public function main() returns error? {
-
-    // First the FuelFile needs to be parsed and loading into a table
-    check parseFuelCsv(FuelFileName);
-
-    // Test for data in the FuelTable and panic if none is found
-    FuelPrices[] testPrices = from FuelPrices fuel in FuelTable
-        limit 1
-        select fuel;
-    if testPrices.length() == 0 {
-        panic error("Fuel data table is emplty");
-    }
-}
 
 configurable int port = 9090;
 
@@ -86,6 +70,45 @@ service /fuel on new http:Listener(port) {
     resource function post prices(@http:Payload FuelPrices[] prices) returns http:Ok {
         prices.forEach((p) => FuelTable.put(p));
         return http:OK;
+    }
+}
+
+# Creates a standar year month day date number allowing for correct sorting and lookups
+#
+# + year - 4 digit Year
+# + month - 2 digit Month
+# + day - 2 digit Day
+# + return - hexadecimal string representation of int value
+function creatYMDKey(int? year, int? month, int? day) returns int|error {
+    return check int:fromString(intToString(year ?: 0, 4) + intToString(month ?: 0, 2) + intToString(day ?: 0, 2));
+}
+
+# Adds leading 0s to an int string based on the precision
+#
+# + n - int to be converted to a string
+# + precision - how many total digits should return
+# + return - hexadecimal string representation of int value
+function intToString(int n, int precision) returns string {
+    string s = n.toString();
+    while s.length() < precision {
+        s = "0" + s;
+    }
+    return s;
+}
+
+configurable string FuelFileName = "resources/PET_PRI_GND_DCUS_NUS_W - Data 1.csv";
+
+public function main() returns error? {
+
+    // First the FuelFile needs to be parsed and loading into a table
+    check parseFuelCsv(FuelFileName);
+
+    // Test for data in the FuelTable and panic if none is found
+    FuelPrices[] testPrices = from FuelPrices fuel in FuelTable
+        limit 1
+        select fuel;
+    if testPrices.length() == 0 {
+        panic error("Fuel data table is emplty");
     }
 }
 
@@ -159,29 +182,6 @@ function parseFuelCsv(string fileName) returns error? {
             }
         }
     }
-}
-
-# Creates a standar year month day date number allowing for correct sorting and lookups
-#
-# + year - 4 digit Year
-# + month - 2 digit Month
-# + day - 2 digit Day
-# + return - hexadecimal string representation of int value
-function creatYMDKey(int? year, int? month, int? day) returns int|error {
-    return check int:fromString(intToString(year ?: 0, 4) + intToString(month ?: 0, 2) + intToString(day ?: 0, 2));
-}
-
-# Adds leading 0s to an int string based on the precision
-#
-# + n - int to be converted to a string
-# + precision - how many total digits should return
-# + return - hexadecimal string representation of int value
-function intToString(int n, int precision) returns string {
-    string s = n.toString();
-    while s.length() < precision {
-        s = "0" + s;
-    }
-    return s;
 }
 
 string[] MONTHS = ["", "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
