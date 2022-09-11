@@ -1,4 +1,6 @@
+
 **Description:**
+
 <!-- Give a brief description of the issue -->
 
 **Suggested Labels:**
@@ -9,7 +11,7 @@
 
 **Affected Product Version:**
 
-**OS, DB, other environment details and versions:**    
+**OS, DB, other environment details and versions:**
 
 **Steps to reproduce:**
 

@@ -1,2 +1,6 @@
-# devrel
-All WSO2 DevRel tasks and content can be tracked here.
+# WSO2 DevRel
+
+To our developer community, we will represent the company. To the company, we will represent the developer community.
+
+## References
+
