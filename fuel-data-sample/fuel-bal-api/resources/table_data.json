@@ -1,9 +1,14 @@
 {
-    "date":"",
-    "price": {
-        "regular": "",
-        "midgrade": "",
-        "premium": "",
-        "diesel": ""
-    }
+  "ymd": 20000103,
+  "date": {
+    "year": 2000,
+    "month": 1,
+    "day": 3
+  },
+  "grade": {
+    "diesel": 1.309,
+    "premium": 1.457,
+    "midgrade": 1.369,
+    "regular": 1.26
+  }
 }
