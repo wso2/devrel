@@ -41,7 +41,7 @@ public function main() returns error? {
     }
 }
 
-configurable int port = 8080;
+configurable int port = 9090;
 
 service /fuel on new http:Listener(port) {
 
@@ -77,6 +77,15 @@ service /fuel on new http:Listener(port) {
         } else {
             return price;
         }
+    }
+
+    # Pupulates the FuelTable with posted FuelPrices data
+    #
+    # + prices - An array of FuelPrice objects to pun in the FuelTable
+    # + return - HTTP OK 200
+    resource function post prices(@http:Payload FuelPrices[] prices) returns http:Ok {
+        prices.forEach((p) => FuelTable.put(p));
+        return http:OK;
     }
 }
 
