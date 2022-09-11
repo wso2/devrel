@@ -4,10 +4,11 @@ import ballerina/file;
 import ballerina/lang.value;
 import ballerina/regex;
 import ballerina/time;
+import ballerina/http;
 
 const FuelFileName = "resources/PET_PRI_GND_DCUS_NUS_W - Data 1.csv";
 
-type Fuel record {
+type FuelPrices record {
     readonly int ymd;
     time:Date date;
     record {
@@ -15,8 +16,48 @@ type Fuel record {
         float premium;
         float midgrade;
         float regular;
-    } price;
+    } grade;
 };
+
+table<FuelPrices> key(ymd) FuelTable = table [];
+
+public function main() returns error? {
+    check parseFile();
+
+    FuelPrices[] prices = from FuelPrices fuel in FuelTable
+        where fuel.ymd >= 20200601
+        limit 1
+        select fuel;
+
+    io:println("Data", prices);
+}
+
+configurable int port = 8080;
+
+service /fuel on new http:Listener(port) {
+    resource function get prices(int? year, int? month, int? day, int? size) returns FuelPrices[]|http:BadRequest {
+        int|error dateQuery = int:fromString(intToString(year ?: 0, 4) + intToString(month ?: 0, 2) + intToString(day ?: 0, 2));
+        if dateQuery is error {
+            return http:BAD_REQUEST;
+        }
+
+        FuelPrices[] prices = from FuelPrices fuel in FuelTable
+            where fuel.ymd >= dateQuery
+            limit size ?: 1
+            select fuel;
+
+        return prices;
+    }
+
+    resource function get prices/[int ymd]() returns FuelPrices|http:NotFound {
+        FuelPrices? price = FuelTable[ymd];
+        if price is () {
+            return http:NOT_FOUND;
+        } else {
+            return price;
+        }
+    }
+}
 
 type CsvFuel record {
     string DATE; //Week end-date
@@ -26,14 +67,11 @@ type CsvFuel record {
     string EMD_EPD2D_PTE_NUS_DPG; //Weekly U.S. No 2 Diesel Retail Prices  (Dollars per Gallon)
 };
 
-public function main() returns error? {
-
+function parseFile() returns error? {
     boolean fileExists = check file:test(FuelFileName, file:READABLE);
     if (fileExists) {
         string[][] content = check io:fileReadCsv(FuelFileName);
         string[] header = content.shift();
-        io:println("Header", header.toString());
-        table<Fuel> key(ymd) fuelTable = table [];
 
         foreach var fuelData in content {
             map<string> formatted = {};
@@ -54,10 +92,10 @@ public function main() returns error? {
                     float|error regular = float:fromString(cf.EMM_EPMRU_PTE_NUS_DPG);
                     int|error yearMonthDay = int:fromString(intToString(date.year, 4) + intToString(date.month, 2) + intToString(date.day, 2));
 
-                    fuelTable.put({
+                    FuelTable.put({
                         ymd: yearMonthDay is error ? 0 : yearMonthDay,
                         date: date,
-                        price: {
+                        grade: {
                             diesel: diesel is error ? 0 : diesel,
                             premium: premium is error ? 0 : premium,
                             midgrade: midgrade is error ? 0 : midgrade,
@@ -67,13 +105,6 @@ public function main() returns error? {
                 }
             }
         }
-
-        Fuel[] prices = from Fuel fuel in fuelTable
-            where fuel.ymd >= 20200601
-            limit 1
-            select fuel;
-
-        io:println("Data", prices);
     }
 }
 
