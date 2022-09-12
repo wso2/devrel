@@ -184,24 +184,109 @@ function parseFuelCsv(string fileName) returns error? {
     }
 }
 
-string[] MONTHS = ["", "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
-
 # Parses a date string
 #
 # + dateString - ex: Jan, 3, 2000
 # + return - time:Date value
 function dateFromString(string dateString) returns time:Date|error {
-    string[] pieces = regex:split(dateString, " ");
+    string[] pieces = regex:split(regex:replace(dateString, ",", ""), " ");
     string month = pieces[0];
-    string day = regex:replace(pieces[1], ",", "");
+    string day = pieces[1];
     string year = pieces[2];
     time:Date date = {
         year: check int:fromString(year),
-        month: MONTHS.indexOf(month.toLowerAscii(), 1) ?: 0,
+        month: shortnameToIndex(month),
         day: check int:fromString(day)
     };
 
     return date;
 }
 
+// Month index conversion mentods https://stackoverflow.com/collectives/wso2/articles/73277351/a-guide-for-date-time-conversion-in-ballerina-language
+function shortnameToIndex(string shortname) returns int {
+    match shortname.toLowerAscii() {
+        "jan" => {
+            return 1;
+        }
+        "feb" => {
+            return 2;
+        }
+        "mar" => {
+            return 3;
+        }
+        "apr" => {
+            return 4;
+        }
+        "may" => {
+            return 5;
+        }
+        "jun" => {
+            return 6;
+        }
+        "jul" => {
+            return 7;
+        }
+        "aug" => {
+            return 8;
+        }
+        "sep" => {
+            return 9;
+        }
+        "oct" => {
+            return 10;
+        }
+        "nov" => {
+            return 11;
+        }
+        "dec" => {
+            return 12;
+        }
+        _ => {
+            return 0;
+        }
+    }
+}
 
+function indexToShortname(int index) returns string {
+    match index {
+        1 => {
+            return "Jan";
+        }
+        2 => {
+            return "Feb";
+        }
+        3 => {
+            return "Mar";
+        }
+        4 => {
+            return "Apr";
+        }
+        5 => {
+            return "May";
+        }
+        6 => {
+            return "Jun";
+        }
+        7 => {
+            return "Jul";
+        }
+        8 => {
+            return "Aug";
+        }
+        9 => {
+            return "Sep";
+        }
+        10 => {
+            return "Oct";
+        }
+        11 => {
+            return "Nov";
+        }
+        12 => {
+            return "Dec";
+        }
+        _ => {
+            return "";
+        }
+    }
+}
