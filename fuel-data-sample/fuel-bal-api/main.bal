@@ -97,6 +97,8 @@ function intToString(int n, int precision) returns string {
 }
 
 configurable string FuelFileName = "resources/PET_PRI_GND_DCUS_NUS_W - Data 1.csv";
+configurable string EndPoint = "";
+configurable string APIKEY = "";
 
 public function main() returns error? {
 
@@ -110,6 +112,27 @@ public function main() returns error? {
     if testPrices.length() == 0 {
         panic error("Fuel data table is emplty");
     }
+}
+
+function saveData() returns error? {
+
+    // Creates a new client with the backend URL.
+    final http:Client clientEndpoint = check new (EndPoint);
+
+    FuelPrices[] prices = from FuelPrices fuel in FuelTable
+        select fuel;
+    // Send the parsed data to the server
+    json resp = check clientEndpoint->post("/prices", prices, {
+        "API-KEY": APIKEY
+    });
+    io:println(resp);
+
+    // Check for valid data
+    resp = check clientEndpoint->get("/prices", {
+        "API-KEY": APIKEY
+    });
+    io:println(resp);
+    
 }
 
 # A record for the CSV fields neccesary for this service
