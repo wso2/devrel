@@ -97,8 +97,6 @@ function intToString(int n, int precision) returns string {
 }
 
 configurable string FuelFileName = "resources/PET_PRI_GND_DCUS_NUS_W - Data 1.csv";
-configurable string EndPoint = "";
-configurable string APIKEY = "";
 
 public function main() returns error? {
 
@@ -112,7 +110,11 @@ public function main() returns error? {
     if testPrices.length() == 0 {
         panic error("Fuel data table is emplty");
     }
+
 }
+
+configurable string EndPoint = "";
+configurable string APIKEY = "";
 
 function saveData() returns error? {
 

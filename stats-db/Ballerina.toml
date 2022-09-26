@@ -1,0 +1,8 @@
+[package]
+org = "andrewd"
+name = "stats_db"
+version = "0.1.0"
+distribution = "2201.1.2"
+
+[build-options]
+observabilityIncluded = true
