@@ -1,6 +1,6 @@
 # WSO2 DevRel integration examples
 
-This repo provides examples of how you can integrate different languages and frameworks with ZITADEL.
+This repo provides examples of how you can integrate different languages and frameworks with WSO2.
 
 ## [React](./react)
 
@@ -20,7 +20,7 @@ This repo provides examples of how you can integrate different languages and fra
 
 - [Large Example List](https://vuejsexamples.com/tag/nuxt/)
 
-## [Angular](./angular))
+## [Angular](./angular)
 
 - [Official Sample apps](https://angular.io/guide/example-apps-list)
 
@@ -30,6 +30,8 @@ This repo provides examples of how you can integrate different languages and fra
 - [MERN starter](https://github.com/shanhuiyang/TypeScript-MERN-Starter)
 
 ## [Spring Boot](./spring-boot)
+
+- [Baeldung starter](https://www.baeldung.com/spring-boot-start)
 
 ## [Laravel](./laravel)
 

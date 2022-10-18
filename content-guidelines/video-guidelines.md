@@ -125,6 +125,6 @@ Make sure the resolution is 1920x1080p or higher. The aspect ratio should be 16:
 - Repeat Branding and ask for feedback
 - Reintroduce yourself and sign-off
 
-## Appendix
+## References
 
 [1] <https://dev.to/stripe/remote-work-a-guide-to-ensuring-quality-video-conferencing-55fi>
