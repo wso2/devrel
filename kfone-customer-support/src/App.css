@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  padding: 0;
+  color: #2a2a2a;
+  background-color: #fff;
+  font-family: BlinkMacSystemFont, Segoe WPC, Segoe UI, HelveticaNeue-Light,
+    Ubuntu, Droid Sans, sans-serif, "Helvetica Neue", Arial, Helvetica,
+    sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
