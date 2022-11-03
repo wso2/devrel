@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+.PhoneInput {
+  width: 100%;
+}
+
+.PhoneInput > input {
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(170 179 205 / var(--tw-border-opacity));
+  border-radius: 0.25rem /* 4px */;
+  padding: 0.5rem /* 8px */;
+  width: 100%;
+}
+
+.PhoneInput > input:focus-visible {
+  outline-color: #ff9f9f;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+#talk-tab.tabs-boxed .tab-active {
+  background-color: #0ea5e9;
+}
+
+#data-tab.tabs-boxed .tab-active {
+  background-color: #14b8a6;
+}
