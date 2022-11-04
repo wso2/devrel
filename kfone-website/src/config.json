@@ -1,0 +1,30 @@
+{
+    "auth": {
+        "clientID": "tkIiux97G_KcoXMQ5m0_MXS3uNEa",
+        "baseUrl": "https://api.asgardeo.io/t/kfone",
+        "signInRedirectURL": "https://kfone.life/my-kfone",
+        "signOutRedirectURL": "https://kfone.life",
+        "scope": [
+            "openid",
+            "profile",
+            "email"
+        ],
+        "stsConfig": {
+            "client_id": "CCthS7f4DvpRc1hzQyka8JSBuaAa",
+            "orgHandle": "asgardeodemo",
+            "scope": [
+                "apim:api_manage",
+                "apim:subscription_manage",
+                "apim:tier_manage",
+                "apim:admin",
+                "apim:publisher_settings",
+                "environments:view_prod",
+                "environments:view_dev",
+                "apim:api_generate_key"
+            ]
+        },
+        "stsTokenEndpoint": "https://sts.choreo.dev/oauth2/token",
+        "resourceServerURLs": "https://42807e1f-07ba-4fb0-a6d2-ecc7b41dd143-prod.e1-us-east-azure.choreoapis.dev"
+    },
+    "myaccount": "https://myaccount.kfone.life"
+}
