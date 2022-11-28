@@ -39,8 +39,6 @@ REACT_APP_CHOREO_ORGANIZATION=<ORGANIZATION OF CHOREO HOSTED API>
 REACT_APP_CHOREO_TOKEN_ENDPOINT=<CHOREO TOKEN ENDPOINT>
 ```
 
-PS: If you want to deploy this app(eg. vercel), make sure you added the relevent environment variables there as well. In this case, the `REACT_APP_ASGARDEO_CALLBACK_URL` should be changed based on the web app domain name.
-
 ## Install Dependencies
 
 From the project root, install dependencies using the below command.
@@ -50,7 +48,6 @@ pnpm install
 ```
 
 ## Bootstrap Application
-
 
 ```bash
 pnpm start
