@@ -16,7 +16,9 @@ npm -v # should be something like v8.x
 ## Setup
 
 ```bash
-git clone https://github.com/chaminjay/kfone-website
+git clone https://github.com/wso2/devrel.git
+
+git checkout Kubecon-demos
 
 cd kfone-website
 ```
