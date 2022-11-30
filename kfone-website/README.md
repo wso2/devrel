@@ -9,8 +9,8 @@ Install Node.JS LTS from https://nodejs.org/en/download/
 Verify if you have the LTS version installed.
 
 ```bash
-node -v # should be something like v16.x
-npm -v # should be something like v8.x
+node -v 
+npm -v 
 ```
 
 ## Setup
