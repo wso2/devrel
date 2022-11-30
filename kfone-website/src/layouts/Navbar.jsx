@@ -82,9 +82,6 @@ const Navbar = (props) => {
           <li className="p-4">Services</li>
           <li className="p-4">Support</li>
           <li className="p-4">Store</li>
-          {/* <li className="p-4">
-            <RoundedIconButton icon={<FaUserAlt />} text="hello" />
-          </li> */}
         </ul>
       </div>
     </nav>

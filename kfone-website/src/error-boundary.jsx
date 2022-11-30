@@ -17,8 +17,6 @@
  */
 
 import React from 'react';
-// import { AuthenticationFailure } from './pages/AuthenticationFailure';
-// import { InvalidSystemTimePage } from './pages/InvalidSystemTime';
 
 export const ErrorBoundary = (props) => {
   const { error, children } = props;

@@ -59,11 +59,6 @@ const Header = () => {
               data-dropdown-toggle="dropdown"
               onClick={() => setIsOpen(!isOpen)}
             >
-              {/* <img
-                alt="profil"
-                src="/favicon.ico"
-                className="mx-auto object-cover rounded-full h-10 w-10 "
-              /> */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="45px"
