@@ -30,7 +30,7 @@ import {
 } from 'react-icons/ai';
 import { FiExternalLink } from 'react-icons/fi';
 import Loading from '../layouts/Loading';
-import Config from '../config.json';
+import appConfig from '../Config';
 import avatar from '../assets/images/people/user.png';
 
 const CustomerPortal = ({ children }) => {
@@ -111,7 +111,7 @@ const CustomerPortal = ({ children }) => {
           </button>
         </NavLinkBlock>
         <NavLinkBlock url="">
-          <a href={Config.myaccount} target="blank" className="flex w-full items-center">
+          <a href={appConfig.myaccountURL} target="blank" className="flex w-full items-center">
             <AiOutlineUser size={28} className="mr-3" />
             <div className="flex w-full items-start">
               <h3 className="mr-1">My Account</h3>
