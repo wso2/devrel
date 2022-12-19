@@ -2,7 +2,7 @@ import React from 'react';
 import { AuthProvider } from '@asgardeo/auth-react';
 import { TokenExchangePlugin } from '@asgardeo/token-exchange-plugin';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Config from './config.json';
+import CONFIG from './config';
 import HomePage from './pages/HomePage';
 import PhoneVerification from './pages/customer-portal/PhoneVerification';
 import NotFoundErrorPage from './pages/404';
@@ -16,7 +16,7 @@ import Webinar from './pages/webinar';
 const App = () => {
   return (
     <AuthProvider
-      config={{ ...Config.auth, storage: Storage.WebWorker }}
+      config={{ CONFIG, storage: Storage.WebWorker }}
       plugin={TokenExchangePlugin.getInstance()}>
       <Router>
         <Switch>
