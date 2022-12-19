@@ -3,11 +3,11 @@ import Header from "../Header";
 
 const Layout = ({ children }: any) => {
   return (
-    <div className="font-body text-base font-normal bg-gray-50 text-slate-500 py-8">
+    <div className="font-body text-base font-normal bg-gray-50 text-slate-500">
       <SideBar />
-      <div className="xl:ml-72 xl:mr-11 h-screen">
+      <div className="xl:ml-[250px] h-screen">
         <Header />
-        <div className="pt-28 px-4">{children}</div>
+        <div className="pt-28 container mx-auto px-4">{children}</div>
       </div>
     </div>
   );

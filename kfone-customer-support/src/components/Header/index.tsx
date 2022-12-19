@@ -26,11 +26,11 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed mt-4 m-auto ml-3 xl:ml-5 w-11/12 xl:w-3/4 shadow-lg bg-white items-center h-16 rounded-lg z-[999]">
+    <header className="fixed bg-secondary-800 items-center h-20 w-full xl:w-[calc(100%-250px)] z-[999]">
       <div className="flex h-full px-3">
-        <div className="justify-between items-center pl-2 flex w-full lg:max-w-68 sm:pr-2 sm:ml-0">
+        <div className="justify-end space-x-4 items-center pl-2 flex w-full lg:max-w-68 sm:pr-2 sm:ml-0">
           {state?.displayName && state?.displayName.split(" ") && (
-            <h1 className="text-xl font-semibold text-slate-700">
+            <h1 className="text-xl font-semibold text-slate-100">
               Good {getTimeOfDay()}, {state?.displayName.split(" ")[0]}
             </h1>
           )}
@@ -41,45 +41,14 @@ const Header = () => {
               data-dropdown-toggle="dropdown"
               onClick={() => setIsOpen(!isOpen)}
             >
-              {/* <img
-                alt="profil"
-                src="/favicon.ico"
-                className="mx-auto object-cover rounded-full h-10 w-10 "
-              /> */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="45px"
-                height="45px"
-                viewBox="0 0 64 64"
-                version="1.1"
-              >
-                <circle
-                  fill="#E60000"
-                  width="64"
-                  height="64"
-                  cx="32"
-                  cy="32"
-                  r="32"
-                />
-                <text
-                  x="50%"
-                  y="50%"
-                  style={{
-                    color: "#ffffff",
-                    lineHeight: "1",
-                  }}
-                  alignment-baseline="middle"
-                  text-anchor="middle"
-                  font-size="26"
-                  font-weight="400"
-                  dy=".1em"
-                  dominant-baseline="middle"
-                  fill="#ffffff"
-                >
-                  {/* @ts-ignore - false positive type checking */}
-                  {state?.displayName?.split(" ") && (state?.displayName.split(" ").shift().charAt(0) + state?.displayName.split(" ").pop().charAt(0)).toUpperCase()}
-                </text>
-              </svg>
+              <div className="avatar online placeholder">
+                <div className="bg-primary text-gray-50 rounded-full w-16">
+                  <span className="text-xl">
+                    {/* @ts-ignore - false positive type checking */}
+                    {state?.displayName?.split(" ") && (state?.displayName.split(" ").shift().charAt(0) + state?.displayName.split(" ").pop().charAt(0)).toUpperCase()}
+                  </span>
+                </div>
+              </div> 
             </button>
 
             {isOpen && (
