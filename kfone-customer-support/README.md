@@ -4,14 +4,13 @@ Customer Support portal of the Kfone demo telecommunication company.
 
 ## Prerequisites
 
-Install Node.JS LTS from https://nodejs.org/en/download/. Then install **pnpm** as the package manager from https://pnpm.io/installation.
+Install Node.JS LTS from https://nodejs.org/en/download/.
 
 Verify if you have the LTS version installed.
 
 ```bash
-node -v # should be something like v16.x
-npm -v # should be something like v8.x
-pnpm -v # should be something like v7.x
+node -v
+npm -v
 ```
 
 ## Setup
@@ -30,16 +29,16 @@ Get a copy of the `.env.example` file and rename it as .env. Then change the bel
 
 ```json
 NODE_ENV=development
-REACT_APP_ASGARDEO_CLIENT_ID=<CLIENT ID TAKEN FROM ASGARDEO CONSOLE>
-REACT_APP_ASGARDEO_BASE_URL=<BASE URL TAKEN FROM ASGARDEO CONSOLE>
-REACT_APP_ASGARDEO_CALLBACK_URL=<CALLBACK URL AFTER A SUCCESSFUL AUTHENTICATION>
-REACT_APP_CHOREO_CLIENT_ID=<CONSUMER ID TAKEN FROM CHOREO CONSOLE>
+HTTPS=true
+PORT=3000
+REACT_APP_ASGARDEO_CLIENT_ID=<CLIENT ID OF THE OIDC APPLICATION REGISTERED IN ASGARDEO>
+REACT_APP_ASGARDEO_BASE_URL=<BASE URL OF THE ASGARDEO API ENDPOINT (Eg. https://api.asgardeo.io/t/kfone)>
+REACT_APP_ASGARDEO_CALLBACK_URL=<CALLBACK URL (Eg. https://localhost:3000)>
+REACT_APP_CHOREO_CLIENT_ID=<CONSUMER ID OF THE APPLICATION REGISTERED IN CHOREO>
 REACT_APP_BASE_API_ENDPOINT=<BASE URL OF CHOREO HOSTED API>
 REACT_APP_CHOREO_ORGANIZATION=<ORGANIZATION OF CHOREO HOSTED API>
 REACT_APP_CHOREO_TOKEN_ENDPOINT=<CHOREO TOKEN ENDPOINT>
 ```
-
-PS: If you want to deploy this app(eg. vercel), make sure you added the relevent environment variables there as well. In this case, the `REACT_APP_ASGARDEO_CALLBACK_URL` should be changed based on the web app domain name.
 
 ## Install Dependencies
 
@@ -50,7 +49,6 @@ pnpm install
 ```
 
 ## Bootstrap Application
-
 
 ```bash
 pnpm start
