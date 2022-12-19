@@ -5,7 +5,7 @@ const Layout = ({ children }: any) => {
   return (
     <div className="font-body text-base font-normal bg-gray-50 text-slate-500">
       <SideBar />
-      <div className="xl:ml-[250px] h-screen">
+      <div className="xl:ml-[250px] min-h-screen">
         <Header />
         <div className="pt-28 container mx-auto px-4">{children}</div>
       </div>

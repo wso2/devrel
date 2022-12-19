@@ -4,6 +4,7 @@ import CustomerInfo from "../pages/customerInfo";
 import Cases from "../pages/cases";
 import Marketing from "../pages/marketing";
 import Error from "../pages/error";
+import ProspectInfo from "../pages/prospectInfo";
 
 export const config: RouteObject[] = [
   {
@@ -22,6 +23,10 @@ export const config: RouteObject[] = [
   {
     path: "/marketing",
     element: <Marketing />,
+  },
+  {
+    path: "/prospects",
+    element: <ProspectInfo />,
   },
   {
     path: "*",
