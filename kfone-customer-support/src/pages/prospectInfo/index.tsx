@@ -1,12 +1,13 @@
 import { useAuthContext } from "@asgardeo/auth-react";
 import { FormEvent, ReactElement, useMemo, useState } from "react";
 import { FaHubspot, FaSalesforce } from "react-icons/fa";
-import { VscSourceControl } from "react-icons/vsc";
+import { VscSourceControl, VscSymbolProperty } from "react-icons/vsc";
 import {
     MdSentimentVerySatisfied,
     MdSentimentSatisfied,
     MdSentimentNeutral,
-    MdSentimentDissatisfied
+    MdSentimentDissatisfied,
+    MdCircle
 } from "react-icons/md";
 import {
     HiOutlineNewspaper,
@@ -17,7 +18,8 @@ import {
     HiOutlineOfficeBuilding,
     HiOutlineUser,
     HiOutlineSearch,
-    HiOutlineExternalLink
+    HiOutlineExternalLink,
+    HiOutlineAnnotation
 } from "react-icons/hi";
 import {
     SiFacebook,
@@ -123,6 +125,29 @@ const ProspectInfo = () => {
             email: salesforceData.Email,
             leadSource: salesforceData.LeadSource,
             company: salesforceData.Company
+        };
+    }, [userInfo]);
+
+    // servicenow data
+    const snData = useMemo(() => {
+        const account = userInfo?.serviceNowData?.serviceNowAccount;
+        const cases = userInfo?.serviceNowData?.serviceNowCases;
+
+        if (!account && !cases) {
+            return;
+        }
+
+        let status = "";
+
+        if (Object.keys(account).length !== 0) {
+            const res = account.result;
+
+            status = res.customer === "true" ? "Customer" : "";
+        }
+
+        return {
+            status: status,
+            cases: cases
         };
     }, [userInfo]);
 
@@ -324,6 +349,18 @@ const ProspectInfo = () => {
                                                 Lead source:&nbsp;
                                                 <span className="text-sm text-pink-800">
                                                     {sfData?.leadSource}
+                                                </span>
+                                            </div>
+                                        ) : null}
+                                        {snData?.status ? (
+                                            <div className="flex justify-between items-center py-2 px-4 rounded-full text-slate-500 bg-green-50 text-xs">
+                                                <VscSymbolProperty
+                                                    className="text-green-500 mr-2"
+                                                    size={24}
+                                                />
+                                                ServiceNow status:&nbsp;
+                                                <span className="text-sm text-green-800">
+                                                    {snData?.status}
                                                 </span>
                                             </div>
                                         ) : null}
@@ -737,6 +774,80 @@ const ProspectInfo = () => {
                                     <div className="stat-desc"></div>
                                 </div>
                             </div>
+                            {snData && snData?.cases.length !== 0 ? (
+                                <div className="grid grid-cols-1 gap-6 pb-10">
+                                    <div className="card w-full shadow-xl bg-white text-secondary">
+                                        <div className="card-body">
+                                            <h2 className="card-title mb-2">
+                                                <HiOutlineAnnotation className="text-primary" />
+                                                Cases
+                                            </h2>
+                                            <div className="overflow-x-auto">
+                                                <table className="table table-compact w-full">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Case Number</th>
+                                                            <th>Opened At</th>
+                                                            <th>Description</th>
+                                                            <th>Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {snData.cases.map(
+                                                            (
+                                                                el: any,
+                                                                index: number
+                                                            ) => (
+                                                                <tr key={index}>
+                                                                    <td>
+                                                                        {
+                                                                            el.number
+                                                                        }
+                                                                    </td>
+                                                                    <td>
+                                                                        {
+                                                                            el.opened_at
+                                                                        }
+                                                                    </td>
+                                                                    <td>
+                                                                        {
+                                                                            el.short_description
+                                                                        }
+                                                                    </td>
+                                                                    <td>
+                                                                        {el.active ===
+                                                                        "true" ? (
+                                                                            <span className="flex items-center">
+                                                                                Open&nbsp;
+                                                                                <MdCircle
+                                                                                    size={
+                                                                                        10
+                                                                                    }
+                                                                                    color="#fb923c"
+                                                                                />
+                                                                            </span>
+                                                                        ) : (
+                                                                            <span className="flex items-center">
+                                                                                Closed&nbsp;
+                                                                                <MdCircle
+                                                                                    size={
+                                                                                        10
+                                                                                    }
+                                                                                    color="#4ade80"
+                                                                                />
+                                                                            </span>
+                                                                        )}
+                                                                    </td>
+                                                                </tr>
+                                                            )
+                                                        )}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : null}
                         </div>
                     ) : null}
                 </Layout>
