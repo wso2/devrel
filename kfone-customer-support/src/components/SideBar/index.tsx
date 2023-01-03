@@ -48,7 +48,7 @@ const SideBar = () => {
           <GiCrossedAirFlows size={56} />
           <div className="ml-2 flex flex-col justify-start">
             <div>Kfone</div>
-            <div className="font-display font-medium  text-gray-50 text-sm">Customer Portal</div>
+            <div className="font-display font-medium  text-gray-50 text-sm">Customer Support Portal</div>
           </div>
         </h1>
       </div>
