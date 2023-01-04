@@ -1,6 +1,8 @@
 # Kfone Customer Support
 
-Customer Support portal of the Kfone demo telecommunication company.
+Customer Support portal of the Kfone demo telecommunication company. This includes;
+  - Personal user information and cases
+  - Enterprise user and prospect information and cases
 
 ## Prerequisites
 
