@@ -546,7 +546,7 @@ const MyPlan = () => {
                               {el?.additionalPurchases?.length > 0 ? (
                                 el?.additionalPurchases?.map((el2, subKey) =>
                                   el2?.additionalMinutes === 0 ? (
-                                    <span>-</span>
+                                    <span key={subKey}>-</span>
                                   ) : (
                                     <span
                                       key={subKey}

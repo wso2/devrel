@@ -28,8 +28,42 @@ import "./App.css";
 import authConfig from "./config/auth";
 import { useEffect } from "react";
 import Loader from "./components/Loader";
+import { MdErrorOutline } from "react-icons/md";
 
 const App = () => {
+  if (
+    !(
+      authConfig.signInRedirectURL &&
+      authConfig.baseUrl &&
+      authConfig.clientID &&
+      authConfig.resourceServerURLs &&
+      authConfig.stsTokenEndpoint &&
+      authConfig.stsConfig.client_id &&
+      authConfig.stsConfig.orgHandle
+    )
+  ) {
+    return (
+      <div className="w-screen h-screen flex justify-center items-center">
+        <p className="w-[400px] flex flex-col items-center">
+          <MdErrorOutline color="red" size={36} />
+          <span className="text-lg my-4 text-center">
+            One or more values are missing from <code>.env</code> file. Please check and restart the
+            app.
+          </span>
+          <br />
+          <a 
+            href="https://github.com/wso2/devrel/blob/Kubecon-demos/kfone-customer-support/README.md#lets-setup-the-environment-variables"
+            target="_blank"
+            rel="noreferrer"
+            className="text-blue-800 underline text-sm"
+          >
+            Learn more
+          </a>
+        </p>
+      </div>
+    );
+  }
+  
   return (
     <AuthProvider
       config={authConfig as any}

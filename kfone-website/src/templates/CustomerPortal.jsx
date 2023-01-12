@@ -30,7 +30,7 @@ import {
 } from 'react-icons/ai';
 import { FiExternalLink } from 'react-icons/fi';
 import Loading from '../layouts/Loading';
-import appConfig from '../Config';
+import appConfig from '../config';
 import avatar from '../assets/images/people/user.png';
 
 const CustomerPortal = ({ children }) => {

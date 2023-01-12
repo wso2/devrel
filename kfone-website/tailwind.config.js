@@ -4,7 +4,15 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   darkMode: 'class',
   daisyui: {
-    themes: ['light']
+    themes: [
+      {
+        light: {
+          ...require('daisyui/src/colors/themes')['[data-theme=light]'],
+          primary: '#E60000',
+          'primary-focus': '#AE0000'
+        }
+      }
+    ]
   },
   theme: {
     extend: {

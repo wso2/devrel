@@ -16,19 +16,12 @@
  * under the License.
  */
 
-import SideBar from "../../components/SideBar";
-import Header from "../Header";
+import React from 'react';
 
-const Layout = ({ children }: any) => {
+const Spinner = () => {
   return (
-    <div className="font-body text-base font-normal bg-gray-50 text-slate-500">
-      <SideBar />
-      <div className="xl:ml-[250px] min-h-screen">
-        <Header />
-        <div className="pt-28 container mx-auto px-4">{children}</div>
-      </div>
-    </div>
+    <div className="w-6 h-6 border-4 border-dashed rounded-full animate-spin border-primary"></div>
   );
 };
 
-export default Layout;
+export default Spinner;

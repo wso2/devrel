@@ -16,8 +16,10 @@
  * under the License.
  */
 
-const BASE_URL =
-  'https://42807e1f-07ba-4fb0-a6d2-ecc7b41dd143-prod.e1-us-east-azure.choreoapis.dev';
+import axios from 'axios';
+
+// eslint-disable-next-line no-undef
+const BASE_URL = process.env.REACT_APP_BASE_API_ENDPOINT;
 
 export async function initiatePhoneVerify(email, mobile, httpRequest) {
   const requestConfig = {
@@ -126,3 +128,18 @@ export const getPackageRecommendation = (userId, httpRequest) => {
       throw error;
     });
 };
+
+export const getAccessToken = () =>
+  axios.post(
+    'https://sts.choreo.dev/oauth2/token',
+    {
+      grant_type: 'client_credentials'
+    },
+    {
+      headers: {
+        // eslint-disable-next-line no-undef
+        Authorization: `Basic ${process.env.REACT_APP_CHOREO_AUTH_TOKEN}`,
+        'Content-Type': 'application/json'
+      }
+    }
+  );
