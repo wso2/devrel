@@ -11,7 +11,7 @@ Any video about WSO2 products is good for the brand. WSO2 needs to be able to pr
 Before recording or presenting, ensuring everything will work before committing to the entire recording is good practice.
 
 - Record 1-5 minutes of your presentation for review.
-- Test lighting considering the time of day can change.
+- Test lighting, considering the time of day can change.
 - Look and listen for any audio and video issues.
 - Try out different presentation elements to make sure they fit in the recording.
 
@@ -68,7 +68,7 @@ In any visual presentation, text on the screen is a detriment.
 
 - Mention the brand at the beginning and end.
 - Add how a viewer can find more information or follow our progress.
-- Ask for comments as we will follow up later
+- Ask for comments, as we will follow up later
 
 ### General
 

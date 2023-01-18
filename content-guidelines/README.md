@@ -2,6 +2,8 @@
 
 This directory has a collection of guildines and instructions for authoring technical content.
 
+## [Content Developement](b2d-developer-content.md)
+
 ## [Blogs/Aticles](written-guidelines.md)
 
 ## [Video](video-guidelines.md)
