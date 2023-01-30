@@ -17,7 +17,7 @@
  */
 
 import React from 'react';
-import Typed from 'react-typed';
+import { TypeAnimation } from 'react-type-animation';
 import { GiCrossedAirFlows } from 'react-icons/gi';
 import connections from '../assets/images/connections.svg';
 import background_waves from '../assets/images/background-waves.svg';
@@ -37,12 +37,12 @@ const Hero = () => {
       <p className="text-secondary text-l font-thin mb-4">Anywhere • Anytime</p>
 
       <p className="text-secondary text-xl font-thin py-2">
-        <Typed
+        <TypeAnimation
           className="text-primary text-2xl font-light"
-          strings={['#fast', '#reliable', '#secure', '#futuristic']}
-          typeSpeed={120}
-          backSpeed={140}
-          loop
+          sequence={['#fast', 1000, '#reliable', 1000, '#secure', 1000, '#futuristic', 1000]}
+          speed={50} // Custom Speed from 1-99 - Default Speed: 40
+          wrapper="span" // Animation will be rendered as a <span>
+          repeat={Infinity} // Repeat this Animation Sequence infinitely
         />
         connections with Kfone.
       </p>

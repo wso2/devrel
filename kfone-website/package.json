@@ -17,7 +17,7 @@
     "react-phone-number-input": "^3.2.11",
     "react-router-dom": "^5.3.4",
     "react-scripts": "5.0.1",
-    "react-typed": "^1.2.0",
+    "react-type-animation": "^2.1.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
