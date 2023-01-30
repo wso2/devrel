@@ -39,7 +39,7 @@ const Hero = () => {
       <p className="text-secondary text-xl font-thin py-2">
         <TypeAnimation
           className="text-primary text-2xl font-light"
-          sequence={['#fast', 1000, '#reliable', 1000, '#futuristic', 1000]}
+          sequence={['#fast', 1000, '#reliable', 1000, '#secure', 1000, '#futuristic', 1000]}
           speed={50} // Custom Speed from 1-99 - Default Speed: 40
           wrapper="span" // Animation will be rendered as a <span>
           repeat={Infinity} // Repeat this Animation Sequence infinitely
