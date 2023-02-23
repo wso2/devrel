@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "kfone": {
+      "type": "object",
+      "properties": {
+        "customer_360": {
+          "type": "object",
+          "properties": {
+            "SFClientID": {
+              "type": "string",
+              "description": ""
+            },
+            "SFClientSecret": {
+              "type": "string",
+              "description": ""
+            },
+            "SFRefreshToken": {
+              "type": "string",
+              "description": ""
+            },
+            "hubspotClientID": {
+              "type": "string",
+              "description": ""
+            },
+            "hubspotClientSecret": {
+              "type": "string",
+              "description": ""
+            },
+            "hubspotRefreshToken": {
+              "type": "string",
+              "description": ""
+            },
+            "clearbitAPIKey": {
+              "type": "string",
+              "description": ""
+            },
+            "twitterAccessToken": {
+              "type": "string",
+              "description": ""
+            },
+            "serviceNowUsername": {
+              "type": "string",
+              "description": ""
+            },
+            "serviceNowPassword": {
+              "type": "string",
+              "description": ""
+            },
+            "serviceNowUrl": {
+              "type": "string",
+              "description": ""
+            },
+            "isDebugEnabled": {
+              "type": "boolean",
+              "description": ""
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "SFClientID",
+            "SFClientSecret",
+            "SFRefreshToken",
+            "hubspotClientID",
+            "hubspotClientSecret",
+            "hubspotRefreshToken",
+            "clearbitAPIKey",
+            "twitterAccessToken",
+            "serviceNowUsername",
+            "serviceNowPassword",
+            "serviceNowUrl"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

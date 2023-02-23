@@ -1,0 +1,6 @@
+[settings]
+  buildImage = false
+
+[[container.copy.files]]
+sourceFile="./resources/webinar-email-template.html"
+target="/home/ballerina/resources/webinar-email-template.html"

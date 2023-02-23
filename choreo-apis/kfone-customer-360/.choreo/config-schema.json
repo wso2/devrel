@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "kfone": {
+      "type": "object",
+      "properties": {
+        "kfone_customer_360": {
+          "type": "object",
+          "properties": {
+            "AsgardeoClientID": {
+              "type": "string",
+              "description": ""
+            },
+            "AsgardeoClientSecret": {
+              "type": "string",
+              "description": ""
+            },
+            "AsgardeoOrganization": {
+              "type": "string",
+              "description": ""
+            },
+            "ChoreoClientID": {
+              "type": "string",
+              "description": ""
+            },
+            "ChoreoClientSecret": {
+              "type": "string",
+              "description": ""
+            },
+            "ChoreoOrgHandler": {
+              "type": "string",
+              "description": ""
+            },
+            "ChoreoSTSBasePath": {
+              "type": "string",
+              "description": ""
+            },
+            "UsageDataAPIPath": {
+              "type": "string",
+              "description": ""
+            },
+            "isDebugEnabled": {
+              "type": "boolean",
+              "description": ""
+            },
+            "dummyUserId": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "AsgardeoClientID",
+            "AsgardeoClientSecret",
+            "ChoreoClientID",
+            "ChoreoClientSecret"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "kfone": {
+      "type": "object",
+      "properties": {
+        "white_paper_download": {
+          "type": "object",
+          "properties": {
+            "hubspotClientId": {
+              "type": "string",
+              "description": ""
+            },
+            "hubspotClientSecret": {
+              "type": "string",
+              "description": ""
+            },
+            "hubspotRefreshToken": {
+              "type": "string",
+              "description": ""
+            },
+            "googleClientId": {
+              "type": "string",
+              "description": ""
+            },
+            "googleClientSecret": {
+              "type": "string",
+              "description": ""
+            },
+            "googleRefreshToken": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "hubspotClientId",
+            "hubspotClientSecret",
+            "hubspotRefreshToken",
+            "googleClientId",
+            "googleClientSecret",
+            "googleRefreshToken"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

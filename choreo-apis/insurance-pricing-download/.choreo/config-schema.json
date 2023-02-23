@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "kfone": {
+      "type": "object",
+      "properties": {
+        "insurance_pricing_download": {
+          "type": "object",
+          "properties": {
+            "hubspotRefreshToken": {
+              "type": "string",
+              "description": ""
+            },
+            "hubspotClientID": {
+              "type": "string",
+              "description": ""
+            },
+            "hubspotClientSecret": {
+              "type": "string",
+              "description": ""
+            },
+            "googleRefreshToken": {
+              "type": "string",
+              "description": ""
+            },
+            "googleClientID": {
+              "type": "string",
+              "description": ""
+            },
+            "googleClientSecret": {
+              "type": "string",
+              "description": ""
+            },
+            "slackToken": {
+              "type": "string",
+              "description": ""
+            },
+            "channelName": {
+              "type": "string",
+              "description": ""
+            },
+            "SFRefreshToken": {
+              "type": "string",
+              "description": ""
+            },
+            "SFClientID": {
+              "type": "string",
+              "description": ""
+            },
+            "SFClientSecret": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "hubspotRefreshToken",
+            "hubspotClientID",
+            "hubspotClientSecret",
+            "googleRefreshToken",
+            "googleClientID",
+            "googleClientSecret",
+            "slackToken",
+            "SFRefreshToken",
+            "SFClientID",
+            "SFClientSecret"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

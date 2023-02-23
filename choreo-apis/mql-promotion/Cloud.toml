@@ -1,0 +1,6 @@
+[settings]
+  buildImage = false
+
+[[container.copy.files]]
+sourceFile="./resources/new-opp-email-template.html"
+target="/home/ballerina/resources/new-opp-email-template.html"
