@@ -1,0 +1,108 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "kfone": {
+      "type": "object",
+      "properties": {
+        "falesforce_webhook": {
+          "type": "object",
+          "properties": {
+            "slackToken": {
+              "type": "string",
+              "description": ""
+            },
+            "SFRefreshToken": {
+              "type": "string",
+              "description": ""
+            },
+            "SFClientID": {
+              "type": "string",
+              "description": ""
+            },
+            "SFClientSecret": {
+              "type": "string",
+              "description": ""
+            },
+            "SFUsername": {
+              "type": "string",
+              "description": ""
+            },
+            "SFPassword": {
+              "type": "string",
+              "description": ""
+            },
+            "googleRefreshToken": {
+              "type": "string",
+              "description": ""
+            },
+            "googleClientID": {
+              "type": "string",
+              "description": ""
+            },
+            "googleClientSecret": {
+              "type": "string",
+              "description": ""
+            },
+            "hubspotRefreshToken": {
+              "type": "string",
+              "description": ""
+            },
+            "hubspotClientID": {
+              "type": "string",
+              "description": ""
+            },
+            "hubspotClientSecret": {
+              "type": "string",
+              "description": ""
+            },
+            "serviceNowPassword": {
+              "type": "string",
+              "description": ""
+            },
+            "AsgardeoClientID": {
+              "type": "string",
+              "description": ""
+            },
+            "AsgardeoClientSecret": {
+              "type": "string",
+              "description": ""
+            },
+            "channelName": {
+              "type": "string",
+              "description": ""
+            },
+            "serviceNowUrl": {
+              "type": "string",
+              "description": ""
+            },
+            "isDebugEnabled": {
+              "type": "boolean",
+              "description": ""
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "slackToken",
+            "SFRefreshToken",
+            "SFClientID",
+            "SFClientSecret",
+            "SFUsername",
+            "SFPassword",
+            "googleRefreshToken",
+            "googleClientID",
+            "googleClientSecret",
+            "hubspotRefreshToken",
+            "hubspotClientID",
+            "hubspotClientSecret",
+            "serviceNowPassword",
+            "AsgardeoClientID",
+            "AsgardeoClientSecret"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

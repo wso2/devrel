@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "kfone": {
+      "type": "object",
+      "properties": {
+        "mql_promotion": {
+          "type": "object",
+          "properties": {
+            "slackToken": {
+              "type": "string",
+              "description": ""
+            },
+            "channelName": {
+              "type": "string",
+              "description": ""
+            },
+            "SFRefreshToken": {
+              "type": "string",
+              "description": ""
+            },
+            "SFClientSecret": {
+              "type": "string",
+              "description": ""
+            },
+            "SFClientId": {
+              "type": "string",
+              "description": ""
+            },
+            "googleRefreshToken": {
+              "type": "string",
+              "description": ""
+            },
+            "googleClientSecret": {
+              "type": "string",
+              "description": ""
+            },
+            "googleClientId": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "slackToken",
+            "SFRefreshToken",
+            "SFClientSecret",
+            "SFClientId",
+            "googleRefreshToken",
+            "googleClientSecret",
+            "googleClientId"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

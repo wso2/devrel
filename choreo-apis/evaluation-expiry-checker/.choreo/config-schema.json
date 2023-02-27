@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "kfone": {
+      "type": "object",
+      "properties": {
+        "evaluation_expiry_checker": {
+          "type": "object",
+          "properties": {
+            "slackToken": {
+              "type": "string",
+              "description": ""
+            },
+            "SFRefreshToken": {
+              "type": "string",
+              "description": ""
+            },
+            "SFClientSecret": {
+              "type": "string",
+              "description": ""
+            },
+            "googleRefreshToken": {
+              "type": "string",
+              "description": ""
+            },
+            "googleClientSecret": {
+              "type": "string",
+              "description": ""
+            },
+            "channelName": {
+              "type": "string",
+              "description": ""
+            },
+            "serviceNowUrl": {
+              "type": "string",
+              "description": ""
+            },
+            "isDebugEnabled": {
+              "type": "boolean",
+              "description": ""
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "slackToken",
+            "SFRefreshToken",
+            "SFClientSecret",
+            "googleRefreshToken",
+            "googleClientSecret"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

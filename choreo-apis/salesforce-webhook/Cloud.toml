@@ -1,0 +1,6 @@
+[settings]
+  buildImage = false
+
+[[container.copy.files]]
+sourceFile="./resources/won-opp-email-template.html"
+target="/home/ballerina/resources/won-opp-email-template.html"

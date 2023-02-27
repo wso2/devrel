@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "kfone": {
+      "type": "object",
+      "properties": {
+        "hubspot_webhook": {
+          "type": "object",
+          "properties": {
+            "hubspotConfig": {
+              "type": "object",
+              "properties": {
+                "clientSecret": {
+                  "type": "string"
+                },
+                "callbackURL": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "clientSecret",
+                "callbackURL"
+              ],
+              "name": "ballerinax/trigger.hubspot:0.6.2:ListenerConfig",
+              "description": ""
+            },
+            "hubspotClientId": {
+              "type": "string",
+              "description": ""
+            },
+            "hubspotRefreshToken": {
+              "type": "string",
+              "description": ""
+            },
+            "slackToken": {
+              "type": "string",
+              "description": ""
+            },
+            "channelName": {
+              "type": "string",
+              "description": ""
+            },
+            "SFClientId": {
+              "type": "string",
+              "description": ""
+            },
+            "SFClientSecret": {
+              "type": "string",
+              "description": ""
+            },
+            "SFRefreshToken": {
+              "type": "string",
+              "description": ""
+            },
+            "googleClientId": {
+              "type": "string",
+              "description": ""
+            },
+            "googleClientSecret": {
+              "type": "string",
+              "description": ""
+            },
+            "googleRefreshToken": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "hubspotConfig",
+            "hubspotClientId",
+            "hubspotRefreshToken",
+            "slackToken",
+            "SFClientId",
+            "SFClientSecret",
+            "SFRefreshToken",
+            "googleClientId",
+            "googleClientSecret",
+            "googleRefreshToken"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

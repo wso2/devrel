@@ -1,0 +1,10 @@
+[settings]
+  buildImage = false
+
+[[container.copy.files]]
+sourceFile="./resources/end-evaluation-am-mail-template.html"
+target="/home/ballerina/resources/end-evaluation-am-mail-template.html"
+
+[[container.copy.files]]
+sourceFile="./resources/end-evaluation-lead-mail-template.html"
+target="/home/ballerina/resources/end-evaluation-lead-mail-template.html"

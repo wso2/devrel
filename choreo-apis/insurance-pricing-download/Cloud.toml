@@ -1,0 +1,6 @@
+[settings]
+  buildImage = false
+
+[[container.copy.files]]
+sourceFile="./resources/upsell-email-template.html"
+target="/home/ballerina/resources/upsell-email-template.html"

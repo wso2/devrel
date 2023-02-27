@@ -1,0 +1,9 @@
+[build-options]
+  observabilityIncluded = true
+
+[package]
+  distribution = "2201.2.3"
+  name = "webinar_registration_hh"
+  org = "kfone"
+  version = "0.1.0"
+
