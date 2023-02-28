@@ -18,6 +18,9 @@ configurable string slackToken = ?;
 configurable string channelName = "general";
 configurable string SFClientId = ?;
 configurable string SFClientSecret = ?;
+configurable string SFOwnerName = ?;
+configurable string SFOwnerId = ?;
+configurable string SFOwnerEmail = ?;
 configurable string SFRefreshToken = ?;
 configurable string googleClientId = ?;
 configurable string googleClientSecret = ?;
@@ -153,16 +156,10 @@ function updateLifeCycleStageOnHubSpot(contact:Client hubspotEndpoint, string co
 
 function promoteMQL(Lead lead) returns error? {
 
-    // Temp: AM data
-    // AM am = {
-    //     name: "Vihanga Liyanage",
-    //     sfId: "0058d0000025cNbAAI",
-    //     email: "vihanga@wso2.com"
-    // };
     AM am = {
-        name: "Nipun Sampath",
-        sfId: "0058d0000025cNbAAI",
-        email: "nipunsam@wso2.com"
+        name: SFOwnerName,
+        sfId: SFOwnerId,
+        email: SFOwnerEmail
     };
 
     check createLeadInSalesForce(lead, am);
