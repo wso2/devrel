@@ -354,7 +354,7 @@ function getSubscriptionInfo(int subscriptionId) returns SubscriptionDO|error {
     if (subscriptionInfo == null) {
         return error("500");
     }
-    return subscriptionInfo;
+    return <SubscriptionDO> subscriptionInfo;
 }
 
 function addUsageData(UsageCreate usageCreateData) returns error? {
