@@ -102,7 +102,7 @@ const Marketing = () => {
     const emailsQueryString = audienceEmails.join("&");
 
     await httpRequest({
-      url: `${process.env.REACT_APP_BASE_API_ENDPOINT}/marketing-campaign-api-2/1.0.0/sendMarketingMail?${emailsQueryString}`,
+      url: `${process.env.REACT_APP_BASE_API_ENDPOINT}/marketing-campaign-api/1.0.0/sendMarketingMail?${emailsQueryString}`,
       method: "POST",
     });
 
