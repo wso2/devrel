@@ -69,7 +69,7 @@ const Marketing = () => {
       setIsUserInfoLoading(true);
       setIsUserInfoError(false);
       const res = await httpRequest({
-        url: `${process.env.REACT_APP_BASE_API_ENDPOINT}/yphf/user-interactions-api/1.0.0/interactionsByCategory?category=${selectedCategory?.id}`,
+        url: `${process.env.REACT_APP_BASE_API_ENDPOINT}/user-interactions-api/1.0.0/interactionsByCategory?category=${selectedCategory?.id}`,
       });
       setUserInfo(res?.data);
       setCheckedState(new Array(res?.data?.length).fill(true));
@@ -102,7 +102,7 @@ const Marketing = () => {
     const emailsQueryString = audienceEmails.join("&");
 
     await httpRequest({
-      url: `${process.env.REACT_APP_BASE_API_ENDPOINT}/yphf/marketing-campaign-api-2/1.0.0/sendMarketingMail?${emailsQueryString}`,
+      url: `${process.env.REACT_APP_BASE_API_ENDPOINT}/marketing-campaign-api-2/1.0.0/sendMarketingMail?${emailsQueryString}`,
       method: "POST",
     });
 
