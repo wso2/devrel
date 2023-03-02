@@ -97,7 +97,7 @@ export const recordUserInteractions = (email, interactions, httpRequest) => {
       mobileSubscriptionVisits: mobileSubscriptionVisits ?? 0,
       tvSubscriptionVisits: tvSubscriptionVisits ?? 0
     },
-    url: `${BASE_URL}/yphf/user-interactions-api/1.0.0/interactions`
+    url: `${BASE_URL}/user-interactions-api/1.0.0/interactions`
   };
 
   return httpRequest(requestConfig);
@@ -113,7 +113,7 @@ export const getPackageRecommendation = (userId, httpRequest) => {
     params: {
       userId: userId
     },
-    url: `${BASE_URL}/yphf/usage-data-api/1.0.0/packageRecommendation`
+    url: `${BASE_URL}/usage-data-api/1.0.0/packageRecommendation`
   };
 
   return httpRequest(requestConfig)
