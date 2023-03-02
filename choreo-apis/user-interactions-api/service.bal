@@ -11,10 +11,10 @@ configurable string hubspotRefreshToken = ?;
 
 type Interaction record {
     string email;
-    int phoneClicks;
-    int dealClicks;
-    int phoneSubscriptionClicks;
-    int tvSubscriptionClicks;
+    int iotDevicesVisits;
+    int mobileSubscriptionVisits;
+    int smartPhoneVisits;
+    int tvSubscriptionVisits;
 };
 
 enum EventType {
@@ -48,20 +48,20 @@ service / on new http:Listener(9090) {
 
         if search.total == 1 {
             contact:SimplePublicObject[] contacts = search.results;
-            string|() phoneClicks = check contacts[0].properties["iot_devices_visits"].ensureType();
-            string|() dealClicks = check contacts[0].properties["mobile_subscription_visits"].ensureType();
-            string|() phoneSubscriptionClicks = check contacts[0].properties["smartphone_visits"].ensureType();
-            string|() tvSubscriptionClicks = check contacts[0].properties["tv_subscription_visits"].ensureType();
+            string|() iotDevicesVisits = check contacts[0].properties["iot_devices_visits"].ensureType();
+            string|() mobileSubscriptionVisits = check contacts[0].properties["mobile_subscription_visits"].ensureType();
+            string|() smartPhoneVisits = check contacts[0].properties["smartphone_visits"].ensureType();
+            string|() tvSubscriptionVisits = check contacts[0].properties["tv_subscription_visits"].ensureType();
             string|() interactionScore = check contacts[0].properties["interaction_score"].ensureType();
 
             int scoreIncrement = calculateScoreIncrement(interaction);
             // Update contact.
             contact:SimplePublicObjectInput updatePayload = {
                 "properties": {
-                    "iot_devices_visits" : phoneClicks == () ? interaction.phoneClicks : check int:fromString(phoneClicks) + interaction.phoneClicks,
-                    "mobile_subscription_visits" : dealClicks == () ? interaction.dealClicks : check int:fromString(dealClicks) + interaction.dealClicks,
-                    "smartphone_visits": phoneSubscriptionClicks == () ? interaction.phoneSubscriptionClicks : check int:fromString(phoneSubscriptionClicks) + interaction.phoneSubscriptionClicks,
-                    "tv_subscription_visits": tvSubscriptionClicks == () ? interaction.tvSubscriptionClicks : check int:fromString(tvSubscriptionClicks) + interaction.tvSubscriptionClicks,
+                    "iot_devices_visits" : iotDevicesVisits == () ? interaction.iotDevicesVisits : check int:fromString(iotDevicesVisits) + interaction.iotDevicesVisits,
+                    "mobile_subscription_visits" : mobileSubscriptionVisits == () ? interaction.mobileSubscriptionVisits : check int:fromString(mobileSubscriptionVisits) + interaction.mobileSubscriptionVisits,
+                    "smartphone_visits": smartPhoneVisits == () ? interaction.smartPhoneVisits : check int:fromString(smartPhoneVisits) + interaction.smartPhoneVisits,
+                    "tv_subscription_visits": tvSubscriptionVisits == () ? interaction.tvSubscriptionVisits : check int:fromString(tvSubscriptionVisits) + interaction.tvSubscriptionVisits,
                     "interaction_score": interactionScore == () ? scoreIncrement : check int:fromString(interactionScore) + scoreIncrement
                 }
             };
@@ -99,18 +99,18 @@ service / on new http:Listener(9090) {
             contact:SimplePublicObject[] contacts = search.results;
             foreach contact:SimplePublicObject contact in contacts {
                 string|() email = check contact.properties["email"].ensureType();
-                string|() phoneClicks = check contact.properties["iot_devices_visits"].ensureType();
-                string|() dealClicks = check contact.properties["mobile_subscription_visits"].ensureType();
-                string|() phoneSubscriptionClicks = check contact.properties["smartphone_visits"].ensureType();
-                string|() tvSubscriptionClicks = check contact.properties["tv_subscription_visits"].ensureType();
+                string|() iotDevicesVisits = check contact.properties["iot_devices_visits"].ensureType();
+                string|() mobileSubscriptionVisits = check contact.properties["mobile_subscription_visits"].ensureType();
+                string|() smartPhoneVisits = check contact.properties["smartphone_visits"].ensureType();
+                string|() tvSubscriptionVisits = check contact.properties["tv_subscription_visits"].ensureType();
                 string|() interactionScore = check contact.properties["interaction_score"].ensureType();
 
                 json interactions = {
                     email: email,
-                    dealClicks: dealClicks == () ? 0 : check int:fromString(dealClicks),
-                    phoneClicks: phoneClicks == () ? 0 : check int:fromString(phoneClicks),
-                    phoneSubscriptionClicks: phoneSubscriptionClicks == () ? 0 : check int:fromString(phoneSubscriptionClicks),
-                    tvSubscriptionClicks: tvSubscriptionClicks == () ? 0 : check int:fromString(tvSubscriptionClicks),
+                    mobileSubscriptionVisits: mobileSubscriptionVisits == () ? 0 : check int:fromString(mobileSubscriptionVisits),
+                    iotDevicesVisits: iotDevicesVisits == () ? 0 : check int:fromString(iotDevicesVisits),
+                    smartPhoneVisits: smartPhoneVisits == () ? 0 : check int:fromString(smartPhoneVisits),
+                    tvSubscriptionVisits: tvSubscriptionVisits == () ? 0 : check int:fromString(tvSubscriptionVisits),
                     interactionScore: interactionScore == () ? 0 : check int:fromString(interactionScore)
                 };
 
@@ -141,18 +141,18 @@ service / on new http:Listener(9090) {
 
         if search.total == 1 {
             contact:SimplePublicObject[] contacts = search.results;
-            string|() phoneClicks = check contacts[0].properties["iot_devices_visits"].ensureType();
-            string|() dealClicks = check contacts[0].properties["mobile_subscription_visits"].ensureType();
-            string|() phoneSubscriptionClicks = check contacts[0].properties["smartphone_visits"].ensureType();
-            string|() tvSubscriptionClicks = check contacts[0].properties["tv_subscription_visits"].ensureType();
+            string|() iotDevicesVisits = check contacts[0].properties["iot_devices_visits"].ensureType();
+            string|() mobileSubscriptionVisits = check contacts[0].properties["mobile_subscription_visits"].ensureType();
+            string|() smartPhoneVisits = check contacts[0].properties["smartphone_visits"].ensureType();
+            string|() tvSubscriptionVisits = check contacts[0].properties["tv_subscription_visits"].ensureType();
             string|() interactionScore = check contacts[0].properties["interaction_score"].ensureType();
 
             json interactions = {
                 email: email,
-                dealClicks: dealClicks == () ? 0 : check int:fromString(dealClicks),
-                phoneClicks: phoneClicks == () ? 0 : check int:fromString(phoneClicks),
-                phoneSubscriptionClicks: phoneSubscriptionClicks == () ? 0 : check int:fromString(phoneSubscriptionClicks),
-                tvSubscriptionClicks: tvSubscriptionClicks == () ? 0 : check int:fromString(tvSubscriptionClicks),
+                mobileSubscriptionVisits: mobileSubscriptionVisits == () ? 0 : check int:fromString(mobileSubscriptionVisits),
+                iotDevicesVisits: iotDevicesVisits == () ? 0 : check int:fromString(iotDevicesVisits),
+                smartPhoneVisits: smartPhoneVisits == () ? 0 : check int:fromString(smartPhoneVisits),
+                tvSubscriptionVisits: tvSubscriptionVisits == () ? 0 : check int:fromString(tvSubscriptionVisits),
                 interactionScore: interactionScore == () ? 0 : check int:fromString(interactionScore)
             };
             http:Ok ok = { body: interactions };
@@ -231,17 +231,17 @@ isolated function getHubspotContacts(string category) returns contact:PublicObje
 
 isolated function validateInteractionPayload(Interaction interaction) returns error? {
 
-    if (interaction.dealClicks < 0 || interaction.phoneClicks < 0 ||
-     interaction.phoneSubscriptionClicks < 0 || interaction.tvSubscriptionClicks < 0) {
+    if (interaction.mobileSubscriptionVisits < 0 || interaction.iotDevicesVisits < 0 ||
+     interaction.smartPhoneVisits < 0 || interaction.tvSubscriptionVisits < 0) {
          return error("Bad request.");
      }
 }
 
 isolated function calculateScoreIncrement(Interaction interaction) returns int {
 
-    int scoreIncrement = (interaction.dealClicks * eventWeights.get(MOBILE_SUBSCRIPTION_VISITS)) +
-        (interaction.phoneClicks * eventWeights.get(IOT_DEVICES_VISITS)) +
-        (interaction.tvSubscriptionClicks * eventWeights.get(TV_SUBSCRIPTION_VISITS)) +
-        (interaction.phoneSubscriptionClicks * eventWeights.get(SMART_PHONE_VISITS));
+    int scoreIncrement = (interaction.mobileSubscriptionVisits * eventWeights.get(MOBILE_SUBSCRIPTION_VISITS)) +
+        (interaction.iotDevicesVisits * eventWeights.get(IOT_DEVICES_VISITS)) +
+        (interaction.tvSubscriptionVisits * eventWeights.get(TV_SUBSCRIPTION_VISITS)) +
+        (interaction.smartPhoneVisits * eventWeights.get(SMART_PHONE_VISITS));
     return scoreIncrement; 
 }
