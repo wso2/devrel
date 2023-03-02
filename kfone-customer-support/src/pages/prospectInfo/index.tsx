@@ -186,7 +186,7 @@ const ProspectInfo = () => {
             setIsUserInfoLoading(true);
             setIsUserInfoError(false);
             const res = await httpRequest({
-                url: `${process.env.REACT_APP_BASE_API_ENDPOINT}/hvwp/customer-360/1.0.0/customer-360view?email=${email}`
+                url: `${process.env.REACT_APP_BASE_API_ENDPOINT}/prospect-360-api/1.0.0/customer-360view?email=${email}`
             });
             setUserInfo(res?.data);
             setIsUserInfoLoading(false);

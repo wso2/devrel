@@ -32,7 +32,7 @@ export async function initiatePhoneVerify(email, mobile, httpRequest) {
       email: email,
       mobile: mobile
     },
-    url: `${BASE_URL}/yphf/user-registration/1.0.0/initiate`
+    url: `${BASE_URL}/account-verification-api/1.0.0/initiate`
   };
 
   return httpRequest(requestConfig)
@@ -55,7 +55,7 @@ export async function verifyPhone(email, mobile, httpRequest) {
       email: email,
       mobile: mobile
     },
-    url: `${BASE_URL}/yphf/user-registration/1.0.0/verify`
+    url: `${BASE_URL}/account-verification-api/1.0.0/verify`
   };
 
   return httpRequest(requestConfig)
@@ -74,7 +74,7 @@ export async function getUsageData(userId, httpRequest) {
       'Content-Type': 'application/scim+json'
     },
     method: 'GET',
-    url: `${BASE_URL}/yphf/usage-data-api/1.0.0/getUsageData?userId=${userId}`
+    url: `${BASE_URL}/usage-data-api/1.0.0/getUsageData?userId=${userId}`
   };
 
   return httpRequest(requestConfig);
