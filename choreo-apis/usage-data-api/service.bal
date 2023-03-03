@@ -125,6 +125,7 @@ service / on new http:Listener(9090) {
                 };
                 return nf;
             } else {
+                log:printError(recommendation.message());
                 http:InternalServerError ise = {
                     body: "Error getting recommendations"
                 };
@@ -133,6 +134,7 @@ service / on new http:Listener(9090) {
         } else {
             SubscriptionDO|error sub = getSubscriptionInfo(recommendation.subscriptionId);
             if (sub is error) {
+                log:printError(sub.message());
                 http:InternalServerError ise = {
                     body: "Error obtaining subscription info"
                 };
@@ -227,6 +229,7 @@ service / on new http:Listener(9090) {
             }
             error? userData = addUsageData(usageCreatePayload);
             if userData is error {
+                log:printError(userData.message());
                 if userData.message() == "409" {
                     http:Conflict c = { body: "Usage data entry already exists." };
                     return c;
