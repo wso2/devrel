@@ -11,6 +11,7 @@ configurable string mongoPassword = ?;
 configurable string mongoDatabase = ?;
 configurable string mongoCollection = ?;
 configurable string additionalPurchasesCollection = "additionalPurchases";
+configurable string packageRecommendationsCollection = "packageRecommendations";
 configurable string asgardeoClientID = ?;
 configurable string asgardeoClientSecret = ?;
 const string asgardeoBaseUrl = "https://api.asgardeo.io/t/kfone/";
@@ -40,6 +41,11 @@ type AdditionalPurchaseDO record {
     int additionalMinutes;
     int additionalDataUsage;
     int additionalMinutesUsage;
+};
+
+type PackageRecommendationDO record {
+    string userId;
+    int subscriptionId;
 };
 
 type UsageResponsePayload record {
@@ -110,22 +116,35 @@ service / on new http:Listener(9090) {
 
     resource function get packageRecommendation(string userId) returns http:Ok|http:NotFound|http:InternalServerError|error {
 
-        if userId == "95828fa3-25a8-4a67-9927-5f41e8587c5f" || 
-            userId == "50219c29-d575-4b93-a8ff-3cab99fe34b1" {
-                
-            SubscriptionDO sub = check getSubscriptionInfo(2);
+        PackageRecommendationDO|error recommendation = getPackageRecommendation(userId);
+
+        if (recommendation is error) {
+            if (recommendation.message() == "404") {
+                http:NotFound nf = {
+                    body: "Recommendation not found"
+                };
+                return nf;
+            } else {
+                log:printError(recommendation.message());
+                http:InternalServerError ise = {
+                    body: "Error getting recommendations"
+                };
+                return ise;
+            }
+        } else {
+            SubscriptionDO|error sub = getSubscriptionInfo(recommendation.subscriptionId);
+            if (sub is error) {
+                log:printError(sub.message());
+                http:InternalServerError ise = {
+                    body: "Error obtaining subscription info"
+                };
+                return ise;
+            }
             http:Ok ok = { 
                 body: {
                     status: "Recommendation Found",
                     recommendation: sub
                 } 
-            };
-            return ok;
-        } else {
-            http:Ok ok = { 
-                body: {
-                    status: "Recommendation Not Found"
-                }
             };
             return ok;
         }
@@ -210,6 +229,7 @@ service / on new http:Listener(9090) {
             }
             error? userData = addUsageData(usageCreatePayload);
             if userData is error {
+                log:printError(userData.message());
                 if userData.message() == "409" {
                     http:Conflict c = { body: "Usage data entry already exists." };
                     return c;
@@ -252,8 +272,59 @@ service / on new http:Listener(9090) {
             }
             error? userData = addAdditionalPurchaseData(additionalPurchase);
             if userData is error {
+                log:printError(userData.message());
                 if userData.message() == "409" {
                     http:Conflict c = { body: "Usage data entry already exists." };
+                    return c;
+                } else {
+                    http:InternalServerError ise = { body: userData.toString() };
+                    return ise;
+                }
+            }
+            http:Ok ok = { body: "Success"};
+            return ok;
+        } else {
+            log:printError(userResponse.statusCode.toString());
+            if userResponse.statusCode == 404 {
+                http:NotFound nfe = { body: "User not found." };
+                return nfe;
+            } else {
+                http:InternalServerError ise = {body: userResponse.statusCode};
+                return ise;
+            }
+        }
+    }
+
+    resource function post setPackageRecommendation(@http:Payload PackageRecommendationDO packageRecommendation) returns http:Ok|http:NotFound|http:InternalServerError|http:Conflict|http:BadRequest|error {
+
+        // Check if user exists in Asgardeo
+        string scimUserPath = scimEndpoint + "/" + packageRecommendation.userId;
+        http:Client AsgardeoUserEP = check new (asgardeoBaseUrl,
+            auth = {
+                tokenUrl: "https://api.asgardeo.io/t/kfone/oauth2/token",
+                clientId: asgardeoClientID,
+                clientSecret: asgardeoClientSecret,
+                scopes: ["internal_user_mgt_view"]
+            }
+        );
+
+        http:Response userResponse = check AsgardeoUserEP->get(scimUserPath);
+        if (userResponse.statusCode == 200) {
+            if (isDebugEnabled) {
+                log:printDebug("User exists");
+            }
+            SubscriptionDO|error subscriptionInfo = getSubscriptionInfo(packageRecommendation.subscriptionId);
+            if (subscriptionInfo is error) {
+                log:printError(subscriptionInfo.message());
+                http:BadRequest br = { body: "Invalid subscription." };
+                return br;
+            }
+            error? userData = addPackageRecommendationData(packageRecommendation);
+            if userData is error {
+                log:printError(userData.message());
+
+                if userData.message() == "409" {
+                    http:Conflict c = { body: "Recommendation data already exists." };
                     return c;
                 } else {
                     http:InternalServerError ise = { body: userData.toString() };
@@ -352,9 +423,28 @@ function getSubscriptionInfo(int subscriptionId) returns SubscriptionDO|error {
     // Possible memory leaks in case of prior errors. Try with resources pattern needs to be followed.
     mongoClient->close();
     if (subscriptionInfo == null) {
-        return error("500");
+        return error("404");
     }
     return <SubscriptionDO> subscriptionInfo;
+}
+
+
+function getPackageRecommendation(string userId) returns PackageRecommendationDO|error {
+
+    mongodb:Client mongoClient = checkpanic new (mongoConfig, mongoDatabase);
+
+    map<json> queryString = {"userId": userId };
+    stream<PackageRecommendationDO, error?> result = check mongoClient->find(packageRecommendationsCollection, (), queryString);
+    PackageRecommendationDO|null packageRecommendation = null;
+    check result.forEach(function(PackageRecommendationDO recommendationDO) {
+        packageRecommendation = recommendationDO;
+    });
+    // Possible memory leaks in case of prior errors. Try with resources pattern needs to be followed.
+    mongoClient->close();
+    if (packageRecommendation == null) {
+        return error("404");
+    }
+    return <PackageRecommendationDO> packageRecommendation;
 }
 
 function addUsageData(UsageCreate usageCreateData) returns error? {
@@ -396,6 +486,24 @@ function addAdditionalPurchaseData(AdditionalPurchaseDO additionalPurchase) retu
     };
     // TODO handle errors
     mongodb:Error? mongoResponse = check mongoClient->insert(data, additionalPurchasesCollection);
+    mongoClient->close();
+}
+
+function addPackageRecommendationData(PackageRecommendationDO packageRecommendation) returns error? {
+
+    mongodb:Client mongoClient = checkpanic new (mongoConfig, mongoDatabase);
+
+    map<json> data = { "$set": {
+            "userId": packageRecommendation.userId, 
+            "subscriptionId": packageRecommendation.subscriptionId
+        }  
+    };
+    map<json> query = {
+        "userId": packageRecommendation.userId
+    };
+
+    // TODO handle errors
+    int|mongodb:Error? mongoResponse = check mongoClient->update(data, packageRecommendationsCollection, (), query, false, true);
     mongoClient->close();
 }
 
