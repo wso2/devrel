@@ -84,27 +84,26 @@ const PhoneVerification = () => {
     setLoading(true);
     setTimeout(() => {
       if (!validateUserInput(otp)) {
+        console.log('user input error');
         // TODO: handle error
         setLoading(false);
-        return;
-      }
-      if (otp !== sessionStorage.getItem('otp')) {
+      } else if (otp !== sessionStorage.getItem('otp')) {
+        setPhase('OTP_INVALID');
         // TODO: handle error
         setLoading(false);
-        return;
+      } else {
+        verifyPhone(email, phone, httpRequest)
+          .then((res) => {
+            console.log(res);
+            setLoading(false);
+            sessionStorage.setItem('verified', true);
+            history.push('/my-kfone');
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       }
-    }, 3000);
-
-    verifyPhone(email, phone, httpRequest)
-      .then((res) => {
-        console.log(res);
-        setLoading(false);
-        sessionStorage.setItem('verified', true);
-        history.push('/my-kfone');
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    }, 1000);
   };
 
   const resolveContent = (phase) => {
@@ -112,9 +111,22 @@ const PhoneVerification = () => {
       return {
         title: 'Add Your Mobile',
         label: 'Please enter your mobile number',
+        error: '',
         button: 'Add number',
         loadingButton: 'Adding number...',
         helperText: ''
+      };
+    } else if (phase === 'OTP_INVALID') {
+      return {
+        title: 'Verify Your Mobile',
+        label: `We sent a verification code to your phone ending with ${phone.substring(
+          phone?.length - 4,
+          phone?.length
+        )}`,
+        error: 'The OTP enetered is invalid!',
+        button: 'Verify',
+        loadingButton: 'Verifying...',
+        helperText: 'Not received the code yet?'
       };
     } else {
       return {
@@ -123,6 +135,7 @@ const PhoneVerification = () => {
           phone?.length - 4,
           phone?.length
         )}`,
+        error: '',
         button: 'Verify',
         loadingButton: 'Verifying...',
         helperText: 'Not received the code yet?'
@@ -137,6 +150,9 @@ const PhoneVerification = () => {
         <div className="py-2 flex flex-col items-start w-full">
           <label className="mb-1 text-sm" htmlFor="otp">
             {content.label}
+          </label>
+          <label className="mb-1 text-sm" htmlFor="otp" style={{ color: 'red' }}>
+            {content.error}
           </label>
           {phase === 'PHONE_INPUT' ? (
             <PhoneInput placeholder="Enter phone number" value={phone} onChange={setPhone} />
