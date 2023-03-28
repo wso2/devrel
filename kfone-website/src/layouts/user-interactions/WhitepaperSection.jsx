@@ -86,7 +86,7 @@ const WhitepaperSection = () => {
         axios
           .post(
             // eslint-disable-next-line no-undef
-            `${process.env.REACT_APP_BASE_API_ENDPOINT}/hvwp/white-paper-download/1.0.0/whitePaperDownload`,
+            `${process.env.REACT_APP_BASE_API_ENDPOINT}/whitepaper-download/1.0.0/whitePaperDownload`,
             {
               email,
               isWebinarAlert

@@ -32,7 +32,7 @@ export async function initiatePhoneVerify(email, mobile, httpRequest) {
       email: email,
       mobile: mobile
     },
-    url: `${BASE_URL}/account-verification-api/1.0.0/initiate`
+    url: `${BASE_URL}/account-verification-api-2/1.0.0/initiate`
   };
 
   return httpRequest(requestConfig)
@@ -55,7 +55,7 @@ export async function verifyPhone(email, mobile, httpRequest) {
       email: email,
       mobile: mobile
     },
-    url: `${BASE_URL}/account-verification-api/1.0.0/verify`
+    url: `${BASE_URL}/account-verification-api-2/1.0.0/verify`
   };
 
   return httpRequest(requestConfig)
