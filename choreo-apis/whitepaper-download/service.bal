@@ -48,7 +48,12 @@ service / on new http:Listener(9090) {
             string contactID = contacts[0].id;
             string newLifeCycleStatus = check getLifeCycleStage(contacts);
 
-            string noOfDownloads = check contacts[0].properties["no_whitepaper_downloads"].ensureType();
+            string noOfDownloads;
+            if (contacts[0].properties["no_whitepaper_downloads"] === ()) {
+                noOfDownloads = "";
+            } else {
+                noOfDownloads = check contacts[0].properties["no_whitepaper_downloads"].ensureType();
+            }
 
             int newNoOfDownloads;
             if noOfDownloads == "" {
