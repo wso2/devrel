@@ -20,8 +20,8 @@
 const appConfig = {
   clientID: process.env.REACT_APP_ASGARDEO_CLIENT_ID ?? '',
   baseUrl: process.env.REACT_APP_ASGARDEO_BASE_URL ?? '',
-  signInRedirectURL: 'https://localhost:3001/my-kfone',
-  signOutRedirectURL: 'https://localhost:3001',
+  signInRedirectURL: process.env.REACT_APP_ASGARDEO_LOGIN_CALLBACK_URL ?? '',
+  signOutRedirectURL: process.env.REACT_APP_ASGARDEO_LOGOUT_CALLBACK_URL ?? '',
   scope: ['openid', 'profile', 'email'],
   stsConfig: {
     client_id: process.env.REACT_APP_CHOREO_CLIENT_ID ?? '',
