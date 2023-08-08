@@ -22,6 +22,7 @@ import { HiMenuAlt3 } from 'react-icons/hi';
 import { GiCrossedAirFlows } from 'react-icons/gi';
 import { GrClose } from 'react-icons/gr';
 import RoundedIconButton from '../components/buttons/RoundedIconButton';
+import appConfig from '../config';
 
 const Navbar = (props) => {
   const { handleLogin, state } = props;
@@ -56,6 +57,11 @@ const Navbar = (props) => {
         </ul>
       </div>
       <ul className="flex justify-end items-center">
+        {!state?.isAuthenticated && (
+          <li className="px-4 text-red">
+            <a href={appConfig.signUpUrl}>Sign Up</a>
+          </li>
+        )}
         <li className="px-4">
           <RoundedIconButton
             handleLogin={handleLogin}

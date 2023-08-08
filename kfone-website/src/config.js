@@ -23,6 +23,12 @@ const appConfig = {
   signInRedirectURL: process.env.REACT_APP_ASGARDEO_LOGIN_CALLBACK_URL ?? '',
   signOutRedirectURL: process.env.REACT_APP_ASGARDEO_LOGOUT_CALLBACK_URL ?? '',
   scope: ['openid', 'profile', 'email'],
+  signUpUrl: process.env.REACT_APP_SIGN_UP_URL
+    ? process.env.REACT_APP_SIGN_UP_URL.replace(
+        '{{clientId}}',
+        process.env.REACT_APP_ASGARDEO_CLIENT_ID ?? ''
+      )
+    : '',
   stsConfig: {
     client_id: process.env.REACT_APP_CHOREO_CLIENT_ID ?? '',
     orgHandle: process.env.REACT_APP_CHOREO_ORGANIZATION ?? '',

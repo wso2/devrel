@@ -50,6 +50,18 @@ const HomePage = () => {
     })();
   }, []);
 
+  /**
+   * This is a workaround to trigger a login request when users come
+   * from the Sign Up path with auto login enabled.
+   */
+  useEffect(() => {
+    const shouldAutoLogin = query.get('autologin');
+
+    if (shouldAutoLogin) {
+      signIn();
+    }
+  }, [query]);
+
   const handleLogin = () => {
     if (state?.isAuthenticated) {
       history.push('/my-kfone');
