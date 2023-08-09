@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useAuthContext } from '@asgardeo/auth-react';
 import { useLocation, useHistory } from 'react-router-dom';
 import BusinessPlansSection from '../layouts/BusinessPlansSection';
@@ -26,12 +26,15 @@ import Hero from '../layouts/Hero';
 import QuickActionsSection from '../layouts/QuickActionsSection';
 import UnlimitedPlansSection from '../layouts/UnlimitedPlansSection';
 import GeneralTemplate from '../templates/GeneralTemplate';
+import Loading from '../layouts/Loading';
 
 const HomePage = () => {
   const { state, signIn, getDecodedIDPIDToken, trySignInSilently } = useAuthContext();
   const query = new URLSearchParams(useLocation().search);
   const reRenderCheckRef = useRef(false);
   const history = useHistory();
+
+  const [showAutoLoginLoader, setShowAutoLoginLoader] = useState(false);
 
   useEffect(() => {
     reRenderCheckRef.current = true;
@@ -50,6 +53,19 @@ const HomePage = () => {
     })();
   }, []);
 
+  /**
+   * This is a workaround to trigger a login request when users come
+   * from the Sign Up path with auto login enabled.
+   */
+  useEffect(() => {
+    const shouldAutoLogin = query.get('autologin');
+
+    if (shouldAutoLogin) {
+      setShowAutoLoginLoader(true);
+      signIn();
+    }
+  }, [query]);
+
   const handleLogin = () => {
     if (state?.isAuthenticated) {
       history.push('/my-kfone');
@@ -66,6 +82,10 @@ const HomePage = () => {
         signIn();
       });
   };
+
+  if (showAutoLoginLoader) {
+    return <Loading />;
+  }
 
   return (
     <GeneralTemplate handleLogin={handleLogin} state={state}>
