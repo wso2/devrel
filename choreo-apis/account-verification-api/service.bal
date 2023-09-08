@@ -146,14 +146,17 @@ service /smsOtp on new http:Listener(9095) {
             // Create new contact in Hubspot
             contact:SimplePublicObject|error hubspotResponse = createHubspotContact(user.email);
             if hubspotResponse is error {
-                // If an unknown error is thrown
-                http:InternalServerError e = {
-                    body: {
-                        status: "Failure",
-                        message: "Hubspot account creation failed for the user: " + user.email + " - " + hubspotResponse.toString()
-                    }
-                };
-                return e;
+                // Check if the error is a 409
+                if !hubspotResponse.toString().contains("statusCode=409") {
+                    // If an unknown error is thrown
+                    http:InternalServerError e = {
+                        body: {
+                            status: "Failure",
+                            message: "Hubspot account creation failed for the user: " + user.email + " - " + hubspotResponse.toString()
+                        }
+                    };
+                    return e;
+                }
             } else {
                 if isDebugEnabled {
                     log:printInfo(string`### DEBUG - HubSpot contact creation request sent for the email: ${user.email}`);
