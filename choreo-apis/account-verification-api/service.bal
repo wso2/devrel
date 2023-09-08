@@ -143,12 +143,12 @@ service /smsOtp on new http:Listener(9095) {
 
             }
 
-            // Create new contact in Hubspot
+            // Create a new contact in Hubspot
             contact:SimplePublicObject|error hubspotResponse = createHubspotContact(user.email);
             if hubspotResponse is error {
                 // Check if the error is a 409
-                if !hubspotResponse.toString().contains("statusCode=409") {
-                    // If an unknown error is thrown
+                if !regex:matches(hubspotResponse.toString(), ".*statusCode=409.*") {
+                    // An unknown error is thrown
                     http:InternalServerError e = {
                         body: {
                             status: "Failure",
